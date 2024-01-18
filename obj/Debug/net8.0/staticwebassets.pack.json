@@ -1,0 +1,29 @@
+{
+  "Files": [
+    {
+      "Id": "/Users/djalmaf/Desenvolvimento/VS22/FluentBlazorMac/wwwroot/app.css",
+      "PackagePath": "staticwebassets/app.css"
+    },
+    {
+      "Id": "/Users/djalmaf/Desenvolvimento/VS22/FluentBlazorMac/wwwroot/favicon.ico",
+      "PackagePath": "staticwebassets/favicon.ico"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.FluentBlazorMac.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.build.FluentBlazorMac.props",
+      "PackagePath": "build\\FluentBlazorMac.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.FluentBlazorMac.props",
+      "PackagePath": "buildMultiTargeting\\FluentBlazorMac.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.FluentBlazorMac.props",
+      "PackagePath": "buildTransitive\\FluentBlazorMac.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

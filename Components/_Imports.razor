@@ -1,0 +1,21 @@
+﻿@using System.Net.Http
+@using System.Net.Http.Json
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Routing
+@using Microsoft.AspNetCore.Components.Web
+@using static Microsoft.AspNetCore.Components.Web.RenderMode
+@using Microsoft.AspNetCore.Components.Web.Virtualization
+@using Microsoft.FluentUI.AspNetCore.Components
+@using Microsoft.JSInterop
+@using FluentBlazorMac
+@using FluentBlazorMac.Components
+@using FluentBlazorMac.Entitys
+@using FluentBlazorMac.Services.AlunoService
+@using FluentBlazorMac.Services.TurmaService
+@using FluentBlazorMac.Shared
+
+@inject IAlunoService _alunoService
+@inject ITurmaService _turmaService
+@inject IDialogService DialogService
+@inject IToastService ToastService
+@inject NavigationManager NavigationManager

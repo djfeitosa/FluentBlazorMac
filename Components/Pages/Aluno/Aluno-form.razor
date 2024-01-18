@@ -1,0 +1,107 @@
+@page "/aluno-form"
+@page "/aluno-form/{Id:int}"
+@rendermode InteractiveServer
+
+<PageTitle>
+    @pageTitle
+</PageTitle>
+
+<FluentGrid Justify="@JustifyContent.Center">
+    <FluentGridItem>
+        <FluentCard AreaRestricted="false">
+            <FluentLabel Alignment="HorizontalAlignment.Center">
+                @pageTitle
+            </FluentLabel>
+
+            <EditForm Model="Aluno">
+                <FluentTextField Appearance="FluentInputAppearance.Filled" Label="Aluno" @bind-Value="Aluno!.Nome"
+                    Style="width:100%" />
+
+                <FluentTextField Appearance="FluentInputAppearance.Filled" Label="Email" Style="width:100%"
+                    @bind-Value="Aluno!.Email" />
+
+                <FluentNumberField Appearance="FluentInputAppearance.Filled" Label="Idade" Style="width:100%"
+                    @bind-Value="Aluno!.Idade" />
+
+                <FluentTextField Appearance="FluentInputAppearance.Filled" Label="Foto" Style="width:100%"
+                    @bind-Value="Aluno!.Foto" />
+
+                <FluentCombobox Label="Turmas:" Items="@ListaTurmas" Id="turma-listbox" OptionValue="@(t => t.Value)"
+                    Placeholder="Selecione uma turma" OptionText="@(t => t.Text)" @bind-Value="@SelectedValue"
+                    @bind-SelectedOption="@selectedStringOption" @onclick="HandleTurma" />
+
+                @* <p>
+                Selected Value: @SelectedValue<br />
+                Value: @selectedStringOption?.Value/><br />
+                Selected Value: @SelectedValue<br />
+                Value: @selectedStringOption?.Value/><br />
+                </p> *@
+
+                <br />
+                <br />
+
+                <FluentButton Appearance="Appearance.Accent" OnClick="()=>SaveAluno()">
+                    @pageTitle
+                </FluentButton>
+
+                <FluentAnchor Href="/alunos"> Cancela</FluentAnchor>
+            </EditForm>
+
+        </FluentCard>
+    </FluentGridItem>
+</FluentGrid>
+
+@code {
+
+    [Parameter]
+    public int? Id { get; set; } = -1;
+
+    [SupplyParameterFromForm]
+    public Aluno? Aluno { get; set; } = new Aluno();
+
+    ConvertListTo convertListTo = new();
+    private string? SelectedValue;
+    Option<string> selectedStringOption = default!;
+    private List<Option<string>>? ListaTurmas;
+
+    private string pageTitle => Id != null ? "Edita Aluno" : "Novo Aluno";
+    protected override async Task OnInitializedAsync()
+    {
+
+        var lista = await _turmaService.GetListaTurmas();
+        ListaTurmas = convertListTo.ConvertToOption(lista);
+
+        if (Id is null)
+        {
+            Aluno = new Aluno();
+        }
+        else
+        {
+            Aluno = await _alunoService.GetAluno(Id);
+            SelectedValue = Aluno.Turma?.Identificacao;
+        }
+        await base.OnInitializedAsync();
+    }
+
+    private async Task SaveAluno()
+    {
+        if (Id != null)
+        {
+            await _alunoService.UpdateAluno(Aluno!);
+            DialogService.ShowSuccess($"Aluno {Aluno!.Nome} atualizado com sucesso");
+        }
+        else
+        {
+            await _alunoService.AddAluno(Aluno!);
+            DialogService.ShowSuccess($"Aluno {Aluno!.Nome} incluido com sucesso");
+        }
+
+        ToastService.ShowInfo($"Retornando para lista de alunos");
+        NavigationManager.NavigateTo("/alunos");
+    }
+    private void HandleTurma()
+    {
+        Aluno!.TurmaId = Convert.ToInt16(selectedStringOption?.Value);
+    }
+
+}
