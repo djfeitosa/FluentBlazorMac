@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FluentBlazorMac.Context;
 using FluentBlazorMac.Entitys;
+using FluentBlazorMac.Shared;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis.Options;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,7 @@ namespace FluentBlazorMac.Services.TurmaService
 {
     public class TurmaService : ITurmaService
     {
+        ConvertListTo convertListTo = new();
         private readonly AppDbContext _context;
         public TurmaService(AppDbContext context)
         {
@@ -65,11 +67,6 @@ namespace FluentBlazorMac.Services.TurmaService
             _context.Entry(turma).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             return turma;
-        }
-        public async Task<IEnumerable<Turma>> Teste()
-        {
-            var turmas = await _context.Turmas.ToListAsync();
-            return turmas;
         }
     }
 }

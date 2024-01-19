@@ -103,3 +103,4 @@
 /Users/djalmaf/Desenvolvimento/VS22/FluentBlazorMac/obj/Debug/net8.0/ref/FluentBlazorMac.dll
 /Users/djalmaf/Desenvolvimento/VS22/FluentBlazorMac/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Relational.Design.dll
 /Users/djalmaf/Desenvolvimento/VS22/FluentBlazorMac/bin/Debug/net8.0/Pomelo.EntityFrameworkCore.MySql.Design.dll
+/Users/djalmaf/Desenvolvimento/VS22/FluentBlazorMac/obj/Debug/net8.0/FluentBlazorMac.sourcelink.json

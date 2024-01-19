@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FluentBlazorMac.Entitys;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.Options;
 
 namespace FluentBlazorMac.Services.TurmaService
 {
@@ -15,6 +16,5 @@ namespace FluentBlazorMac.Services.TurmaService
         Task<Turma> GetTurma(int id);
         Task<IQueryable<Turma>> GetTurmas();
         Task<Turma> UpdateTurma(Turma turma);
-        Task<IEnumerable<Turma>> Teste();
     }
 }
