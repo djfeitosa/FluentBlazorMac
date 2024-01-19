@@ -2,6 +2,7 @@
 @rendermode InteractiveServer
 
 @* https://www.youtube.com/watch?v=fwKfPCuiTWQ - Vídeo com informaçòes*@
+@* https://www.fluentui-blazor.net/UpgradeGuide *@
 
 @if (alunos == null)
 {
@@ -12,9 +13,11 @@
 else
 {
     <FluentStack HorizontalAlignment="HorizontalAlignment.End">
-    <FluentAnchor Href="/aluno-form" IconStart="@(new Icons.Regular.Size24.PersonAdd().WithColor(Color.Success))">
+    <FluentAnchor Id="btnNovoAluno" Href="/aluno-form"
+        IconStart="@(new Icons.Regular.Size24.PersonAdd().WithColor(Color.Success))">
         Novo Aluno
     </FluentAnchor>
+    <FluentTooltip Anchor="btnNovoAluno" Position=TooltipPosition.Start>Excluir o registro</FluentTooltip>
 </FluentStack>
 
     <div class="grid">
@@ -41,11 +44,13 @@ else
             <PropertyColumn Title="Idade" Property="@(c => c!.Idade)" Sortable="true" Align=Align.Center />
             <PropertyColumn Title="Turma" Property="@(c => c!.Turma.Identificacao)" Sortable="true" Align=Align.Center />
             <TemplateColumn Align="@Align.End">
-                <FluentButton Appearance="Appearance.Outline" OnClick="()=>ConfirmarExclusao(context.Id)"
-                    IconStart="@(new Icons.Regular.Size24.Delete().WithColor(Color.Error))">Deleta</FluentButton>
 
                 <FluentAnchor IconStart="@(new Icons.Regular.Size24.Edit().WithColor(Color.Success))"
-                    Appearance="Appearance.Outline" Href="@($"/aluno-form/{context.Id}")">Edita</FluentAnchor>
+                    Appearance="Appearance.Outline" Href="@($"/aluno-form/{context.Id}")">Edit</FluentAnchor>
+
+                <FluentButton Appearance="Appearance.Outline" OnClick="()=>ConfirmarExclusao(context.Id)"
+                    IconStart="@(new Icons.Regular.Size24.Delete().WithColor(Color.Error))">Delete</FluentButton>
+
             </TemplateColumn>
         </FluentDataGrid>
     </div>
@@ -63,16 +68,15 @@ else
     PaginationState pagination = new PaginationState { ItemsPerPage = 3 };
     protected override async Task OnInitializedAsync()
     {
-        await Task.Delay(1000);
+        @* await Task.Delay(1000); *@
         await CarregaAlunos();
-        pagination.TotalItemCountChanged += (sender, eventArgs) => StateHasChanged();
+        @* pagination.TotalItemCountChanged += (sender, eventArgs) => StateHasChanged(); *@
         await base.OnInitializedAsync();
     }
 
     private async Task CarregaAlunos()
     {
-        @* var alunosList = await _alunoService.GetAlunos();
-alunos = alunosList?.AsQueryable(); *@
+        //Para preencher o Grid os dados precisam ser do tipo AsQueriable e foi definido do AlunosService
         alunos = await _alunoService.GetAlunos();
     }
 

@@ -4,6 +4,7 @@ using FluentBlazorMac.Context;
 using Microsoft.EntityFrameworkCore;
 using FluentBlazorMac.Services.AlunoService;
 using FluentBlazorMac.Services.TurmaService;
+using Microsoft.FluentUI.AspNetCore.Components.Components.Tooltip;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,7 @@ var MySqlVersion = ServerVersion.AutoDetect(connectionString);
 
 builder.Services.AddDbContext<AppDbContext>(x => x.UseMySql(connectionString, MySqlVersion));
 
+builder.Services.AddScoped<ITooltipService, TooltipService>();
 builder.Services.AddScoped<IAlunoService, AlunoService>();
 builder.Services.AddScoped<ITurmaService, TurmaService>();
 
