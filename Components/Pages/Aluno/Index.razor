@@ -13,11 +13,16 @@
 else
 {
     <FluentStack HorizontalAlignment="HorizontalAlignment.End">
+
+    <FluentButton Appearance="Appearance.Outline" OnClick="HandleExportExcel"
+        IconStart="@(new Icons.Regular.Size24.ArrowDown().WithColor(Color.Warning))">
+        Excel
+    </FluentButton>
+
     <FluentAnchor Id="btnNovoAluno" Href="/aluno-form"
         IconStart="@(new Icons.Regular.Size24.PersonAdd().WithColor(Color.Success))">
         Novo Aluno
     </FluentAnchor>
-    <FluentTooltip Anchor="btnNovoAluno" Position=TooltipPosition.Start>Excluir o registro</FluentTooltip>
 </FluentStack>
 
     <div class="grid">
@@ -66,6 +71,8 @@ else
     StringComparison.CurrentCultureIgnoreCase));
 
     PaginationState pagination = new PaginationState { ItemsPerPage = 3 };
+
+    ConvertListTo convertListTo;
     protected override async Task OnInitializedAsync()
     {
         @* await Task.Delay(1000); *@
@@ -76,7 +83,7 @@ else
 
     private async Task CarregaAlunos()
     {
-        //Para preencher o Grid os dados precisam ser do tipo AsQueriable e foi definido do AlunosService
+        //Para preencher o Grid os dados precisam ser do tipo AsQueriable e foi definido no AlunosService
         alunos = await _alunoService.GetAlunos();
     }
 
@@ -142,4 +149,8 @@ else
         }
     }
 
+    private void HandleExportExcel()
+    {
+        convertListTo.ConvertToExcel(FilteredItems.ToList());
+    }
 }
