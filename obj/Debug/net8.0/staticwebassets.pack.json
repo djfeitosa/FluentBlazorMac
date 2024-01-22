@@ -1,6 +1,22 @@
 {
   "Files": [
     {
+      "Id": "/Users/djalmaf/Desenvolvimento/VS22/FluentBlazorMac/wwwroot/Fotos/bianca.jpg",
+      "PackagePath": "staticwebassets/Fotos/bianca.jpg"
+    },
+    {
+      "Id": "/Users/djalmaf/Desenvolvimento/VS22/FluentBlazorMac/wwwroot/Fotos/celina.jpg",
+      "PackagePath": "staticwebassets/Fotos/celina.jpg"
+    },
+    {
+      "Id": "/Users/djalmaf/Desenvolvimento/VS22/FluentBlazorMac/wwwroot/Fotos/djalma.jpg",
+      "PackagePath": "staticwebassets/Fotos/djalma.jpg"
+    },
+    {
+      "Id": "/Users/djalmaf/Desenvolvimento/VS22/FluentBlazorMac/wwwroot/Fotos/leticia.jpg",
+      "PackagePath": "staticwebassets/Fotos/leticia.jpg"
+    },
+    {
       "Id": "/Users/djalmaf/Desenvolvimento/VS22/FluentBlazorMac/wwwroot/app.css",
       "PackagePath": "staticwebassets/app.css"
     },
