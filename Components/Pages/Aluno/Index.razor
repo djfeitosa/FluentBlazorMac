@@ -1,8 +1,10 @@
 @page "/alunos"
 @rendermode InteractiveServer
+@using ClosedXML.Excel
 
 @* https://www.youtube.com/watch?v=fwKfPCuiTWQ - Vídeo com informaçòes*@
 @* https://www.fluentui-blazor.net/UpgradeGuide *@
+@* https://blazorfluentui.azurewebsites.net/FluentSystemIconsPage *@
 
 @if (alunos == null)
 {
@@ -13,6 +15,11 @@
 else
 {
     <FluentStack HorizontalAlignment="HorizontalAlignment.End">
+
+    <FluentButton OnClick="HandleExportPdf"
+        IconStart="@(new Icons.Regular.Size24.DocumentPdf().WithColor(Color.Warning))">
+        PDF
+    </FluentButton>
 
     <FluentButton OnClick="HandleExportExcel"
         IconStart="@(new Icons.Regular.Size24.ArrowDown().WithColor(Color.Warning))">
@@ -71,6 +78,7 @@ else
     StringComparison.CurrentCultureIgnoreCase));
     PaginationState pagination = new PaginationState { ItemsPerPage = 3 };
     ConvertListTo convertListTo = new();
+    string[] columnHeaders = { "Nome", "Email", "Idade", "Turma" };
     protected override async Task OnInitializedAsync()
     {
         @* await Task.Delay(1000); *@
@@ -149,11 +157,31 @@ else
 
     private void HandleExportExcel()
     {
-        string[] columnHeaders = { "Nome", "Email", "Idade", "Turma" };
-        convertListTo.ConvertToExcel(FilteredItems.ToList(), columnHeaders);
+
+        using (var workbook = new XLWorkbook())
+        {
+            var worksheet = workbook.Worksheets.Add("Alunos");
+            var lista = FilteredItems.ToList();
+
+            for (int i = 0; i < columnHeaders.Length; i++)
+            {
+                worksheet.Cell(1, i + 1).Value = columnHeaders[i];
+            }
+
+            for (int i = 0; i < lista.Count; i++)
+            {
+                worksheet.Cell(i + 2, 1).Value = lista[i].Nome;
+                worksheet.Cell(i + 2, 2).Value = lista[i].Email;
+                worksheet.Cell(i + 2, 3).Value = lista[i].Idade;
+                worksheet.Cell(i + 2, 4).Value = lista[i].Turma.Descricao;
+            }
+            convertListTo.SavelocalFile(workbook, "Alunos");
+        }
         ToastService.ShowInfo($"Lista exportada com sucesso!");
-        @* var json = System.Text.Json.JsonSerializer.Serialize(FilteredItems.ToList());
-var saida = System.Text.Json.JsonSerializer.Deserialize(json);
-Console.WriteLine(json); *@
+    }
+
+    private void HandleExportPdf()
+    {
+
     }
 }
