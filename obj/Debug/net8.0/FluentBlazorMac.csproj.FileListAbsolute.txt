@@ -111,3 +111,5 @@
 /Users/djalmaf/Desenvolvimento/VS22/FluentBlazorMac/bin/Debug/net8.0/RBush.dll
 /Users/djalmaf/Desenvolvimento/VS22/FluentBlazorMac/bin/Debug/net8.0/SixLabors.Fonts.dll
 /Users/djalmaf/Desenvolvimento/VS22/FluentBlazorMac/bin/Debug/net8.0/System.IO.Packaging.dll
+/Users/djalmaf/Desenvolvimento/VS22/FluentBlazorMac/bin/Debug/net8.0/BouncyCastle.Crypto.dll
+/Users/djalmaf/Desenvolvimento/VS22/FluentBlazorMac/bin/Debug/net8.0/itextsharp.dll

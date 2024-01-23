@@ -16,11 +16,10 @@ else
 {
     <FluentStack HorizontalAlignment="HorizontalAlignment.End">
 
-    <FluentButton OnClick="HandleExportPdf"
+    <FluentAnchor Id="btnShowPdf" Href="/showpdf"
         IconStart="@(new Icons.Regular.Size24.DocumentPdf().WithColor(Color.Warning))">
         PDF
-    </FluentButton>
-
+    </FluentAnchor>
     <FluentButton OnClick="HandleExportExcel"
         IconStart="@(new Icons.Regular.Size24.ArrowDown().WithColor(Color.Warning))">
         Excel
@@ -30,6 +29,7 @@ else
         IconStart="@(new Icons.Regular.Size24.PersonAdd().WithColor(Color.Success))">
         Novo Aluno
     </FluentAnchor>
+
 </FluentStack>
 
     <div class="grid">
@@ -73,17 +73,18 @@ else
 @code {
     private IQueryable<Aluno>? alunos;
     string nameFilter = string.Empty;
+    string? pdfPath;
+    string? fileName;
 
     IQueryable<Aluno>? FilteredItems => alunos?.Where(x => x.Nome.Contains(nameFilter,
     StringComparison.CurrentCultureIgnoreCase));
     PaginationState pagination = new PaginationState { ItemsPerPage = 3 };
     ConvertListTo convertListTo = new();
     string[] columnHeaders = { "Nome", "Email", "Idade", "Turma" };
+
     protected override async Task OnInitializedAsync()
     {
-        @* await Task.Delay(1000); *@
         await CarregaAlunos();
-        @* pagination.TotalItemCountChanged += (sender, eventArgs) => StateHasChanged(); *@
         await base.OnInitializedAsync();
     }
 
@@ -182,6 +183,14 @@ else
 
     private void HandleExportPdf()
     {
+        fileName = "example.pdf";
+        string title = "Example PDF Document";
+        string body = "This is an example PDF document generated using iTextSharp.";
 
+        PdfGenerator.GeneratePdf(fileName, title, body);
+
+        pdfPath = Path.Combine(Directory.GetCurrentDirectory(), fileName);
+
+        @* ToastService.ShowSuccess($"Operação concluída"); *@
     }
 }

@@ -30,9 +30,12 @@ namespace FluentBlazorMac.Shared
                 var content = stream.ToArray();
                 var contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
                 var fileName = $"{nomeArquivo}.xlsx";
-                Microsoft.AspNetCore.Mvc.FileContentResult file = new Microsoft.AspNetCore.Mvc.FileContentResult(content, contentType);
-                file.FileDownloadName = fileName;
-                var path = @"/Users/djalmaf/Desenvolvimento/VS22/FluentBlazorMac/ArquivosExcel/" + fileName;
+                Microsoft.AspNetCore.Mvc.FileContentResult file = new(content, contentType)
+                {
+                    FileDownloadName = fileName
+                };
+                string fileDestiny = $"ArquivosExcel/{fileName}";
+                var path = Path.Combine(Directory.GetCurrentDirectory(), fileDestiny);
                 System.IO.File.WriteAllBytes(path, content);
             }
         }

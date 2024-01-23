@@ -1,0 +1,7 @@
+@page "/showpdf"
+<object data="data:application/pdf;base64,@(Convert.ToBase64String(PdfGenerator.GerarPdf()))" type="application/pdf"
+    width="100%" height="800px">
+    <p>Seu navegador não suporta PDFs. <a
+            href="data:application/pdf;base64,@(Convert.ToBase64String(PdfGenerator.GerarPdf()))"
+            download="arquivo.pdf">Clique aqui para baixar o arquivo.</a></p>
+</object>

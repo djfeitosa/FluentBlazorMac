@@ -12,5 +12,6 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.1"/>
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql.Design" Version="1.1.2"/>
     <PackageReference Include="ClosedXML" Version="0.104.0-preview2"/>
+    <PackageReference Include="iTextSharp" Version="5.5.13.3"/>
   </ItemGroup>
 </Project>
