@@ -30,6 +30,7 @@ namespace FluentBlazorMac.Services.AlunoService
             var aluno = await _context.Alunos.FindAsync(id);
             ArgumentNullException.ThrowIfNull(aluno);
             _context.Remove(aluno);
+            await _context.SaveChangesAsync();
             return aluno;
         }
 

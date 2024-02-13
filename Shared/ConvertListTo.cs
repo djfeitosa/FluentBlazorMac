@@ -1,9 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using ClosedXML.Excel;
-using FluentBlazorMac.Entitys;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.FluentUI.AspNetCore.Components;
 
@@ -21,23 +16,22 @@ namespace FluentBlazorMac.Shared
             return option;
         }
 
-        public void SavelocalFile(XLWorkbook workbook, string nomeArquivo)
+        public async void SavelocalFile(XLWorkbook workbook, string nomeArquivo)
         {
 
-            using (var stream = new MemoryStream())
+            using var stream = new MemoryStream();
+            workbook.SaveAs(stream);
+            var content = stream.ToArray();
+            var contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            var fileName = $"{nomeArquivo}_{DateTime.Now.Ticks}.xlsx";
+            Microsoft.AspNetCore.Mvc.FileContentResult file = new(content, contentType)
             {
-                workbook.SaveAs(stream);
-                var content = stream.ToArray();
-                var contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                var fileName = $"{nomeArquivo}.xlsx";
-                Microsoft.AspNetCore.Mvc.FileContentResult file = new(content, contentType)
-                {
-                    FileDownloadName = fileName
-                };
-                string fileDestiny = $"ArquivosExcel/{fileName}";
-                var path = Path.Combine(Directory.GetCurrentDirectory(), fileDestiny);
-                System.IO.File.WriteAllBytes(path, content);
-            }
+                FileDownloadName = fileName
+            };
+            // string fileDestiny = $"ArquivosExcel/{fileName}";
+            string downloadsDirectory = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "/Downloads";
+            string path = Path.Combine(downloadsDirectory, fileName);
+            await System.IO.File.WriteAllBytesAsync(path, content);
         }
     }
 }

@@ -114,15 +114,7 @@ else
 
     private async Task Delete(int id)
     {
-        var aluno = await _alunoService.GetAluno(id);
-
-        if (aluno is null)
-        {
-            ToastService.ShowError($"Aluno com id={id} não encontrado");
-            return;
-        }
-
-        var result = await _alunoService.DeleteAluno(aluno.Id);
+        var result = await _alunoService.DeleteAluno(id);
 
         if (result is not null)
         {
@@ -162,23 +154,23 @@ else
         using (var workbook = new XLWorkbook())
         {
             var worksheet = workbook.Worksheets.Add("Alunos");
-            var lista = FilteredItems.ToList();
+            var lista = FilteredItems?.ToList();
 
             for (int i = 0; i < columnHeaders.Length; i++)
             {
                 worksheet.Cell(1, i + 1).Value = columnHeaders[i];
             }
 
-            for (int i = 0; i < lista.Count; i++)
+            for (int i = 0; i < lista?.Count; i++)
             {
                 worksheet.Cell(i + 2, 1).Value = lista[i].Nome;
                 worksheet.Cell(i + 2, 2).Value = lista[i].Email;
                 worksheet.Cell(i + 2, 3).Value = lista[i].Idade;
-                worksheet.Cell(i + 2, 4).Value = lista[i].Turma.Descricao;
+                worksheet.Cell(i + 2, 4).Value = lista[i].Turma?.Descricao;
             }
             convertListTo.SavelocalFile(workbook, "Alunos");
         }
-        ToastService.ShowInfo($"Lista exportada com sucesso!");
+        ToastService.ShowSuccess($"Lista exportada com sucesso! Verifique sua pasta de DOWNLOADS");
     }
 
     private void HandleExportPdf()

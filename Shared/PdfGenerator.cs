@@ -8,7 +8,7 @@ namespace FluentBlazorMac.Shared
         public static void GeneratePdf(string fileName, string title, string body)
         {
             //Create a new document
-            Document document = new Document();
+            Document document = new();
 
             //Create a PDF writer
             PdfWriter.GetInstance(document, new FileStream(fileName, FileMode.Create));
