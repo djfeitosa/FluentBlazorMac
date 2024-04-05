@@ -18,8 +18,10 @@ namespace FluentBlazorMac.Shared
 
             //Add a title
             Font titleFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 18);
-            Paragraph titleParagraph = new Paragraph(title, titleFont);
-            titleParagraph.Alignment = Element.ALIGN_CENTER;
+            Paragraph titleParagraph = new(title, titleFont)
+            {
+                Alignment = Element.ALIGN_CENTER
+            };
             document.Add(titleParagraph);
 
             //Add some text

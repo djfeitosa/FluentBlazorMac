@@ -31,7 +31,7 @@ else
     </FluentAnchor>
 
 </FluentStack>
-
+    <br />
     <div class="grid">
         <FluentDataGrid Id="alunogrid" Items=@FilteredItems TGridItem=Aluno Pagination="@pagination">
             <TemplateColumn Title="Avatar" Align="Align.Start">
@@ -41,7 +41,7 @@ else
                 }
                 else
                 {
-                    <FluentPersona ImageSize="50px" Initials="@context!.Nome[0]!.ToString().ToUpper()" />
+                    <FluentPersona ImageSize="50px" Initials="@context!.Nome[0].ToString().ToUpper()" />
                 }
             </TemplateColumn>
             <PropertyColumn Title="Nome" Property="@(c => c!.Nome)" Sortable="true" Align=Align.Start>
@@ -183,6 +183,8 @@ else
 
         pdfPath = Path.Combine(Directory.GetCurrentDirectory(), fileName);
 
-        @* ToastService.ShowSuccess($"Operação concluída"); *@
+        @* PdfGenerator.GerarPdf(); *@
+
+        ToastService.ShowSuccess("Operação concluída");
     }
 }

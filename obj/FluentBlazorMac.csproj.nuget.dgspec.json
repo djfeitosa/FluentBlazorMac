@@ -40,15 +40,15 @@
           "dependencies": {
             "ClosedXML": {
               "target": "Package",
-              "version": "[0.104.0-preview2, )"
+              "version": "[0.102.2, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[8.0.1, )"
+              "version": "[8.0.2, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "target": "Package",
-              "version": "[8.0.1, )"
+              "version": "[8.0.2, )"
             },
             "Microsoft.FluentUI.AspNetCore.Components": {
               "target": "Package",
@@ -60,7 +60,7 @@
             },
             "Pomelo.EntityFrameworkCore.MySql": {
               "target": "Package",
-              "version": "[8.0.0-beta.2, )"
+              "version": "[8.0.0, )"
             },
             "Pomelo.EntityFrameworkCore.MySql.Design": {
               "target": "Package",
